@@ -3,10 +3,14 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+import { StartScreenComponent } from './start-screen/start-screen.component';
+import { GameComponent } from './game/game.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    StartScreenComponent,
+    GameComponent
   ],
   imports: [
     BrowserModule,
@@ -15,4 +19,6 @@ import { AppComponent } from './app.component';
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+
+}
