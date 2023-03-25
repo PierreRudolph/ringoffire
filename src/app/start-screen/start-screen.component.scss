@@ -16,12 +16,13 @@
     @extend.slide-in-elliptic-top-fwd;
 
     h1 {
-        color: white;
+        color: #ff3232ba;
         font-size: 68px;
         position: absolute;
         top: -151px;
-        left: 100px;
+        left: 25px;
         z-index: 1;
+        letter-spacing: 5px;
     }
 
     img {
@@ -29,8 +30,6 @@
         width: 30vw;
         object-fit: contain;
     }
-
-
 }
 
 .start-button {
@@ -44,6 +43,7 @@
     position: absolute;
     bottom: -50px;
     left: 200px;
+    border: 1px solid white;
 
     &:hover {
         color: rgba(255, 255, 255, 0.8);

@@ -1,15 +1,16 @@
 /* You can add global styles to this file, and also import other style files */
 body {
+    font-family: "coffeeTin", "casino", Arial, Helvetica, sans-serif;
     margin: 0;
 }
 
 @font-face {
-    font-family: 'zabars';
-    src: url('fonts/zabars.ttf') format('truetype');
+    font-family: "coffeeTin";
+    src: url('/assets/fonts/coffeeTin.ttf') format('truetype');
     /* Chrome 4+, Firefox 3.5, Opera 10+, Safari 3—5 */
 }
 
-body {
-    font-family: 'zabars', Arial, Helvetica, sans-serif;
-    margin: 0px;
+@font-face {
+    font-family: "casino";
+    src: url('/assets/fonts/casino.ttf') format('truetype');
 }

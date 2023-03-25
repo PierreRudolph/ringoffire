@@ -6,7 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./game.component.scss']
 })
 export class GameComponent implements OnInit {
+  pickCardAnimation = false;
+
   ngOnInit(): void {
 
+  }
+
+  takeCard() {
+    this.pickCardAnimation = true;
   }
 }
