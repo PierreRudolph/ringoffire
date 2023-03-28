@@ -43,3 +43,6 @@ Thumbs.db
 
 # bat file
 up.bat
+
+# assets
+src/assets
