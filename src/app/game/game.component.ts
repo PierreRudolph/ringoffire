@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { Game } from 'src/models/game';
 import { PlayerComponent } from '../player/player.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
+import { MatMenuTrigger, _MatMenuTriggerBase } from '@angular/material/menu';
+import { ImprintComponent } from '../imprint/imprint.component';
 
 @Component({
   selector: 'app-game',
@@ -15,7 +17,13 @@ export class GameComponent implements OnInit {
   currentCard: string;
   name = PlayerComponent.name;
 
-  constructor(public dialog: MatDialog) { }
+  constructor(private dialog: MatDialog) { }
+
+  @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
+
+  someMethod() {
+    this.trigger.openMenu();
+  }
 
   ngOnInit(): void {
     this.newGame();
@@ -41,7 +49,7 @@ export class GameComponent implements OnInit {
     }
   }
 
-  openDialog(): void {
+  openAddPlayerDialog(): void {
     const dialogRef = this.dialog.open(DialogAddPlayerComponent);
     dialogRef.afterClosed().subscribe((name: string) => {
       if (name && name.length > 0) {

@@ -17,6 +17,12 @@ import { MatCardModule } from '@angular/material/card';
 import { DialogAddPlayerComponent } from './dialog-add-player/dialog-add-player.component';
 import { FormsModule } from '@angular/forms';
 import { GameInfoComponent } from './game-info/game-info.component';
+import { ImprintComponent } from './imprint/imprint.component';
+import { HomeComponent } from './home/home.component';
+import { MatMenuModule } from '@angular/material/menu';
+import { DataPolicyComponent } from './data-policy/data-policy.component';
+
+
 
 @NgModule({
   declarations: [
@@ -25,7 +31,10 @@ import { GameInfoComponent } from './game-info/game-info.component';
     GameComponent,
     PlayerComponent,
     DialogAddPlayerComponent,
-    GameInfoComponent
+    GameInfoComponent,
+    ImprintComponent,
+    HomeComponent,
+    DataPolicyComponent
   ],
   imports: [
     BrowserModule,
@@ -38,6 +47,7 @@ import { GameInfoComponent } from './game-info/game-info.component';
     MatInputModule,
     FormsModule,
     MatCardModule,
+    MatMenuModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
