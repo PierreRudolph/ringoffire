@@ -46,3 +46,8 @@ up.bat
 
 # assets
 src/assets
+
+# Firebase
+.firebase
+*-debug.log
+.runtimeconfig.json
