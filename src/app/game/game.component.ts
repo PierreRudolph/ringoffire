@@ -15,32 +15,29 @@ import { ActivatedRoute } from '@angular/router';
 })
 
 export class GameComponent implements OnInit {
-  game: Game;
-  name = PlayerComponent.name;
   firestore: Firestore = inject(Firestore);
-  gamesCollection: any;
-  actualGame: any;
-  gameId: string;
+  game: Game;
+  gameRef: any;
 
   constructor(private dialog: MatDialog, private route: ActivatedRoute) { }
 
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
 
-  someMethod() {
-    this.trigger.openMenu();
-  }
 
   async ngOnInit() {
     this.newGame();
     this.route.params.subscribe((params) => {
-      this.gameId = params["id"];
-      this.subscribeGameData(params["id"]);
+      const gameId = params["id"];
+      this.gameRef = doc(this.firestore, "games", gameId);
+      this.subscribeGameData();
     });
   }
+
 
   newGame() {
     this.game = new Game();
   }
+
 
   takeCard() {
     if (!this.game.pickCardAnimation) {
@@ -53,20 +50,14 @@ export class GameComponent implements OnInit {
   }
 
 
-  setNextPlayer() {
-    this.game.currentPlayer++;
-    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
+  setGameData() {
+    setDoc(this.gameRef, this.game.toJson(), { merge: false });
   }
 
 
-  openAddPlayerDialog(): void {
-    const dialogRef = this.dialog.open(DialogAddPlayerComponent);
-    dialogRef.afterClosed().subscribe((name: string) => {
-      if (name && name.length > 0) {
-        this.game.players.push(name);
-        this.setGameData()
-      }
-    });
+  setNextPlayer() {
+    this.game.currentPlayer++;
+    this.game.currentPlayer = this.game.currentPlayer % this.game.players.length;
   }
 
 
@@ -79,25 +70,27 @@ export class GameComponent implements OnInit {
   }
 
 
-  setGameData() {
-    let gameRef = doc(this.firestore, "games", this.gameId);
-    setDoc(gameRef, this.game.toJson(), { merge: false });
+  openAddPlayerDialog(): void {
+    const dialogRef = this.getDialog();
+    dialogRef.afterClosed().subscribe((name: string) => {
+      if (!name)
+        return;
+      this.game.players.push(name);
+      this.setGameData();
+    });
   }
 
 
-  getGameData() {
-    const gameDocumentRef = doc(this.firestore, 'game', this.gameId);
-    return docData(gameDocumentRef, { idField: this.gameId });
+  getDialog() {
+    return this.dialog.open(DialogAddPlayerComponent)
   }
 
 
-  subscribeGameData(joinGameId) {
-    if (joinGameId) {
-      onSnapshot(doc(this.firestore, "games", joinGameId), (doc) => {
-        const game: any = doc.data();
-        this.syncGameData(game)
-      });
-    }
+  subscribeGameData() {
+    onSnapshot(this.gameRef, (doc: { data: () => any; }) => {
+      const game: any = doc.data();
+      this.syncGameData(game)
+    });
   }
 
 

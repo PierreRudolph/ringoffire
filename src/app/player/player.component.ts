@@ -5,14 +5,7 @@ import { Component, OnInit, Input } from '@angular/core';
   templateUrl: './player.component.html',
   styleUrls: ['./player.component.scss']
 })
-export class PlayerComponent implements OnInit {
+export class PlayerComponent {
   @Input() name: string;
   @Input() playerActive: boolean = false;
-
-
-  ngOnInit(): void {
-
-  }
-
-
 }
