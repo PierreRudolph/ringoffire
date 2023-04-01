@@ -28,6 +28,8 @@ import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import { PlayerMobileComponent } from './player-mobile/player-mobile.component';
+import { EditPlayerComponent } from './edit-player/edit-player.component';
 
 
 
@@ -41,7 +43,9 @@ import { provideFirestore, getFirestore } from '@angular/fire/firestore';
     GameInfoComponent,
     ImprintComponent,
     HomeComponent,
-    DataPolicyComponent
+    DataPolicyComponent,
+    PlayerMobileComponent,
+    EditPlayerComponent
   ],
   imports: [
     BrowserModule,

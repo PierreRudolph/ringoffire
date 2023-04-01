@@ -4,6 +4,15 @@
     left: 30px;
 }
 
+app-player,
+app-player-mobile {
+    cursor: pointer;
+
+    &:hover {
+        filter: brightness(1.2);
+    }
+}
+
 .field {
     width: 100vw;
     height: 100vh;
@@ -13,14 +22,34 @@
     display: flex;
     justify-content: center;
     align-items: center;
+
+    @media only screen and (max-width:1200px) {
+        justify-content: flex-start;
+    }
 }
 
 .card-stack {
     position: relative;
 
+    @media only screen and (max-width:1200px) {
+        margin-left: 200px;
+    }
+
+    @media only screen and (max-width:670px) {
+        margin-left: 150px;
+    }
+
     img {
         position: absolute;
         width: 150px;
+
+        @media only screen and (max-width:850px) {
+            width: 110px;
+        }
+
+        @media only screen and (max-width:670px) {
+            width: 85px;
+        }
     }
 }
 
@@ -37,11 +66,28 @@
     right: 25px;
 
     transform: scale(1.1) translateX(160px) translateY(-255px) rotate(-10deg);
+
+    @media (max-width:850px) {
+        transform: scale(1.1) translateX(45px) translateY(-208px) rotate(-10deg);
+    }
+
+    @media (max-width:670px) {
+        transform: scale(1.1) translateX(17px) translateY(-160px) rotate(-10deg);
+    }
+
 }
 
 .pick-card {
     animation: pick-card-animation 1s ease-in-out;
     transform: scale(1.1) translateX(160px) translateY(-255px) rotate(-10deg);
+
+    @media (max-width:850px) {
+        transform: scale(1.1) translateX(45px) translateY(-208px) rotate(-10deg);
+    }
+
+    @media (max-width:670px) {
+        transform: scale(1.1) translateX(17px) translateY(-160px) rotate(-10deg);
+    }
 }
 
 @keyframes pick-card-animation {
@@ -58,20 +104,55 @@
     }
 
     100% {
-        transform: scale(1.1) translateX(160px) translateY(-255px) rotate(-10deg);
+
+        @media (min-width:850px) {
+            transform: scale(1.1) translateX(160px) translateY(-255px) rotate(-10deg);
+        }
+
+        @media (max-width:850px) {
+            transform: scale(1.1) translateX(45px) translateY(-208px) rotate(-10deg);
+        }
+
+        @media (max-width:670px) {
+            transform: scale(1.1) translateX(17px) translateY(-160px) rotate(-10deg);
+        }
+
     }
+}
+
+.player-mobile-div {
+    position: absolute;
+    justify-content: end;
+    left: 108px;
+    right: 0px;
+    display: flex;
+    top: 0px;
+    flex-wrap: wrap;
+    padding: 10px;
 }
 
 .player-position {
     position: absolute;
     right: 0;
     z-index: 1;
+
+    @media (max-width:850px) {
+        position: unset;
+        padding: 5px
+    }
 }
 
 .btn-add {
     position: absolute;
     right: 32px;
     bottom: 32px;
+
+    @media only screen and (max-width:670px) {
+        bottom: 160px;
+        right: 15px;
+        height: 45px;
+        width: 45px;
+    }
 }
 
 .pin-bottom {
@@ -79,4 +160,14 @@
     bottom: 30px;
     left: 100px;
     min-width: 15vw;
+    max-width: 60vw;
+
+    @media only screen and (max-width:1200px) {
+        bottom: 0px;
+        left: 0px
+    }
+
+    @media only screen and (max-width:670px) {
+        max-width: unset;
+    }
 }

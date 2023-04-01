@@ -30,8 +30,9 @@
 }
 
 .player-active {
-    background-color: rgb(199, 42, 104);
+
     box-shadow: 13px 1px 9px white;
+    filter: brightness(1.15);
 
     img {
         filter: invert(1);

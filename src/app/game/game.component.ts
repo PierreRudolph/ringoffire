@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, inject } from '@angular/core';
+import { Component, OnInit, ViewChild, inject, ElementRef } from '@angular/core';
 import { Game } from 'src/models/game';
 import { PlayerComponent } from '../player/player.component';
 import { MatDialog } from '@angular/material/dialog';
@@ -7,6 +7,7 @@ import { MatMenuTrigger, _MatMenuTriggerBase } from '@angular/material/menu';
 import { Firestore, docData } from '@angular/fire/firestore';
 import { doc, setDoc, onSnapshot } from "firebase/firestore";
 import { ActivatedRoute } from '@angular/router';
+import { EditPlayerComponent } from '../edit-player/edit-player.component';
 
 @Component({
   selector: 'app-game',
@@ -26,12 +27,15 @@ export class GameComponent implements OnInit {
 
   async ngOnInit() {
     this.newGame();
+
     this.route.params.subscribe((params) => {
       const gameId = params["id"];
       this.gameRef = doc(this.firestore, "games", gameId);
       this.subscribeGameData();
     });
+
   }
+
 
 
   newGame() {
@@ -71,7 +75,7 @@ export class GameComponent implements OnInit {
 
 
   openAddPlayerDialog(): void {
-    const dialogRef = this.getDialog();
+    const dialogRef = this.getAddPlayerDialog();
     dialogRef.afterClosed().subscribe((name: string) => {
       if (!name)
         return;
@@ -80,9 +84,23 @@ export class GameComponent implements OnInit {
     });
   }
 
+  editPlayer(playerId: number) {
+    console.log('edit-player:', playerId);
+    const dialogRef = this.getEditPlayerDialog();
+    dialogRef.afterClosed().subscribe((name: string) => {
+      if (!name)
+        return;
+      this.game.players.push(name);
+      this.setGameData();
+    });
+  }
 
-  getDialog() {
-    return this.dialog.open(DialogAddPlayerComponent)
+  getEditPlayerDialog() {
+    return this.dialog.open(EditPlayerComponent);
+  }
+
+  getAddPlayerDialog() {
+    return this.dialog.open(DialogAddPlayerComponent);
   }
 
 
