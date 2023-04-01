@@ -4,6 +4,8 @@
     left: 30px;
 }
 
+
+
 app-player,
 app-player-mobile {
     cursor: pointer;
@@ -25,6 +27,45 @@ app-player-mobile {
 
     @media only screen and (max-width:1200px) {
         justify-content: flex-start;
+    }
+}
+
+.game-over-div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 100vh;
+    max-width: 100%;
+    background-color: black;
+
+    img {
+        width: 300px;
+    }
+
+    h1 {
+        color: rgb(216, 148, 107);
+        font-size: 70px;
+        letter-spacing: 5px;
+    }
+}
+
+.start-button {
+    cursor: pointer;
+    height: 40px;
+    width: 180px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    font-size: 25px;
+    color: white;
+    border-radius: 30px;
+    background-color: black;
+    margin-top: 30px;
+    border: 2px solid white;
+    font-weight: 500;
+
+    &:hover {
+        color: rgba(255, 255, 255, 0.8);
     }
 }
 
@@ -128,7 +169,8 @@ app-player-mobile {
     display: flex;
     top: 0px;
     flex-wrap: wrap;
-    padding: 10px;
+    max-height: 73vh;
+    overflow: scroll;
 }
 
 .player-position {
@@ -148,7 +190,7 @@ app-player-mobile {
     bottom: 32px;
 
     @media only screen and (max-width:670px) {
-        bottom: 160px;
+        bottom: 135px;
         right: 15px;
         height: 45px;
         width: 45px;

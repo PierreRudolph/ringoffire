@@ -2,7 +2,6 @@
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { DataPolicyComponent } from '../data-policy/data-policy.component';
-
 import { ImprintComponent } from '../imprint/imprint.component';
 
 @Component({
@@ -11,6 +10,7 @@ import { ImprintComponent } from '../imprint/imprint.component';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent {
+
 
   constructor(private dialog: MatDialog) { }
 

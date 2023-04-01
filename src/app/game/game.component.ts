@@ -20,6 +20,7 @@ export class GameComponent implements OnInit {
   game: Game;
   gameRef: any;
 
+  gameOver: boolean = false;
   constructor(private dialog: MatDialog, private route: ActivatedRoute) { }
 
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
@@ -36,21 +37,28 @@ export class GameComponent implements OnInit {
 
   }
 
-
-
   newGame() {
     this.game = new Game();
   }
 
+  hrefNewGame() {
+    window.location.href = '/';
+  }
 
   takeCard() {
-    if (!this.game.pickCardAnimation) {
-      this.game.currentCard = this.game.stack.pop();
-      this.game.pickCardAnimation = true;
-      this.setNextPlayer();
-      this.setGameData();
-      this.updateGameAfterTimeout();
+    if (this.game.stack.length == 0) {
+      this.gameOver = true;
+
+    } else {
+      if (!this.game.pickCardAnimation) {
+        this.game.currentCard = this.game.stack.pop();
+        this.game.pickCardAnimation = true;
+        this.setNextPlayer();
+        this.setGameData();
+        this.updateGameAfterTimeout();
+      }
     }
+
   }
 
 
@@ -80,17 +88,22 @@ export class GameComponent implements OnInit {
       if (!name)
         return;
       this.game.players.push(name);
+      this.game.playerImages.push('player_male.png');
       this.setGameData();
     });
   }
 
   editPlayer(playerId: number) {
-    console.log('edit-player:', playerId);
     const dialogRef = this.getEditPlayerDialog();
-    dialogRef.afterClosed().subscribe((name: string) => {
-      if (!name)
+    dialogRef.afterClosed().subscribe((change: string) => {
+      if (!change)
         return;
-      this.game.players.push(name);
+      if (change == 'DELETE') {
+        this.game.players.splice(playerId, 1);
+        this.game.playerImages.splice(playerId, 1);
+      } else {
+        this.game.playerImages[playerId] = change;
+      }
       this.setGameData();
     });
   }
@@ -112,10 +125,11 @@ export class GameComponent implements OnInit {
   }
 
 
-  syncGameData(game: { currentPlayer: number; playedCards: string[]; players: string[]; stack: string[]; currentCard: string; pickCardAnimation: boolean; }) {
+  syncGameData(game: { currentPlayer: number; playedCards: string[]; players: string[]; playerImages: string[]; stack: string[]; currentCard: string; pickCardAnimation: boolean; }) {
     this.game.currentPlayer = game.currentPlayer;
     this.game.playedCards = game.playedCards;
     this.game.players = game.players;
+    this.game.playerImages = game.playerImages;
     this.game.stack = game.stack;
     this.game.currentCard = game.currentCard;
     this.game.pickCardAnimation = game.pickCardAnimation;

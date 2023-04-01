@@ -1,11 +1,12 @@
 .profile-picture {
     padding: 10px;
-    width: 100px;
-    height: 100px;
+    width: 60px;
     border-radius: 100%;
+    object-fit: contain;
     cursor: pointer;
 
     &:hover {
-        filter: invert(1);
+        transition: all 160ms ease-in-out;
+        transform: scale(1.1) translateY(3px) translateX(-3px);
     }
 }
