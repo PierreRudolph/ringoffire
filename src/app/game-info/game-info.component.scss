@@ -14,12 +14,9 @@
     border: none;
     z-index: 1;
 
-    @media only screen and (max-width:1200px) {
-        border-top-left-radius: 0px;
-    }
+
 
     @media only screen and (max-width:670px) {
-        border-top-right-radius: 0px;
         font-size: 18px;
     }
 }
