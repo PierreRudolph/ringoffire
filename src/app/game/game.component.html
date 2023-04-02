@@ -17,10 +17,18 @@
             [image]="game.playerImages[i]" class="player-position hide-desktop"></app-player-mobile>
     </div>
 
-
+    <div class="preload-images">
+        <img src="assets/img/cards/{{ game.stack[game.stack.length -1] }}.png">
+        <img src="assets/img/profile/female_muertos.png">
+        <img src="assets/img/profile/male_muertos.png">
+        <img src="assets/img/profile/player_female.png">
+        <img src="assets/img/profile/skull_alt.png">
+        <img src="assets/img/profile/skull.png">
+    </div>
 
     <div class="field">
-        <div class="card-stack">
+        <div [matTooltip]="this.game.players.length == 0 ? 'Please add at least one Player':null"
+            matTooltipPosition="after" class="card-stack">
             <!--Card Stack-->
             <!--5 besetzte Stellen im Array stellvetretend für 5 wiederholungen der schleife-->
             <img [ngStyle]="{'right.px': i*5}" *ngFor="let c of [0,1,2,3]; let i=index;"

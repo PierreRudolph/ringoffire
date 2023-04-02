@@ -11,6 +11,7 @@ export class GameInfoComponent implements OnChanges {
   description = '';
   @Input() card: string;
 
+
   ngOnChanges(): void {
     if (this.card) {
       let cardNumber = +this.card.split('_')[1];

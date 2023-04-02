@@ -19,7 +19,7 @@ app-player-mobile {
     width: 100vw;
     height: 100vh;
     max-width: 100%;
-    background-image: url('../../assets/img/board-dark.jpg');
+    background-image: url('../../assets/img/board.jpg');
     background-size: cover;
     display: flex;
     justify-content: center;
@@ -42,12 +42,22 @@ app-player-mobile {
 
     img {
         width: 300px;
+
+        @media (max-width:300px) {
+            width: 250px;
+        }
     }
 
     h1 {
         color: rgb(216, 148, 107);
         font-size: 70px;
         letter-spacing: 5px;
+        white-space: nowrap;
+
+        @media (max-width:670px) {
+            font-size: 40px;
+            letter-spacing: 2px;
+        }
     }
 }
 
@@ -163,14 +173,14 @@ app-player-mobile {
 
 .player-mobile-div {
     position: absolute;
-    justify-content: end;
+    justify-content: flex-end;
     left: 108px;
     right: 0px;
     display: flex;
     top: 0px;
     flex-wrap: wrap;
     max-height: 73vh;
-    overflow: scroll;
+    overflow: auto;
 }
 
 .player-position {
@@ -212,4 +222,12 @@ app-player-mobile {
     @media only screen and (max-width:670px) {
         max-width: unset;
     }
+}
+
+.preload-images {
+    width: 0px;
+    height: 0px;
+    opacity: 0;
+    z-index: -99;
+    position: absolute;
 }

@@ -8,7 +8,7 @@ export class Game {
     public pickCardAnimation: boolean = false;
 
     constructor() {
-        for (let i = 1; i <= 1; i++) {
+        for (let i = 1; i <= 13; i++) {
             this.stack.push('ace_' + i);
             this.stack.push('clubs_' + i);
             this.stack.push('diamonds_' + i);
@@ -29,6 +29,7 @@ export class Game {
         }
     }
 }
+
 
 function shuffleArray(array: string[]) {
     array.sort(() => Math.random() - 0.5);

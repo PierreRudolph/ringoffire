@@ -1,10 +1,9 @@
-import { Component, OnInit, ViewChild, inject, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, inject, Input } from '@angular/core';
 import { Game } from 'src/models/game';
-import { PlayerComponent } from '../player/player.component';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddPlayerComponent } from '../dialog-add-player/dialog-add-player.component';
 import { MatMenuTrigger, _MatMenuTriggerBase } from '@angular/material/menu';
-import { Firestore, docData } from '@angular/fire/firestore';
+import { Firestore } from '@angular/fire/firestore';
 import { doc, setDoc, onSnapshot } from "firebase/firestore";
 import { ActivatedRoute } from '@angular/router';
 import { EditPlayerComponent } from '../edit-player/edit-player.component';
@@ -19,8 +18,8 @@ export class GameComponent implements OnInit {
   firestore: Firestore = inject(Firestore);
   game: Game;
   gameRef: any;
-
   gameOver: boolean = false;
+
   constructor(private dialog: MatDialog, private route: ActivatedRoute) { }
 
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
@@ -34,31 +33,34 @@ export class GameComponent implements OnInit {
       this.gameRef = doc(this.firestore, "games", gameId);
       this.subscribeGameData();
     });
-
   }
+
 
   newGame() {
     this.game = new Game();
   }
 
+
   hrefNewGame() {
     window.location.href = '/';
   }
 
+
   takeCard() {
+    if (this.game.players.length == 0) {
+      return;
+    }
     if (this.game.stack.length == 0) {
       this.gameOver = true;
-
-    } else {
-      if (!this.game.pickCardAnimation) {
-        this.game.currentCard = this.game.stack.pop();
-        this.game.pickCardAnimation = true;
-        this.setNextPlayer();
-        this.setGameData();
-        this.updateGameAfterTimeout();
-      }
+      return;
     }
-
+    if (!this.game.pickCardAnimation) {
+      this.game.currentCard = this.game.stack.pop();
+      this.game.pickCardAnimation = true;
+      this.setNextPlayer();
+      this.setGameData();
+      this.updateGameAfterTimeout();
+    }
   }
 
 
@@ -93,6 +95,7 @@ export class GameComponent implements OnInit {
     });
   }
 
+
   editPlayer(playerId: number) {
     const dialogRef = this.getEditPlayerDialog();
     dialogRef.afterClosed().subscribe((change: string) => {
@@ -108,9 +111,11 @@ export class GameComponent implements OnInit {
     });
   }
 
+
   getEditPlayerDialog() {
     return this.dialog.open(EditPlayerComponent);
   }
+
 
   getAddPlayerDialog() {
     return this.dialog.open(DialogAddPlayerComponent);

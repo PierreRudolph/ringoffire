@@ -18,6 +18,7 @@ export class HomeComponent {
     this.dialog.open(DataPolicyComponent);
   }
 
+
   openImprintDialog(): void {
     this.dialog.open(ImprintComponent);
   }
