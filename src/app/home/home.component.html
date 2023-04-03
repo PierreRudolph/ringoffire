@@ -1,5 +1,6 @@
 <button mat-button [matMenuTriggerFor]="menu" class="home-btn">Home</button>
 <mat-menu #menu="matMenu">
+    <button (click)="hrefNewGame()" mat-menu-item>Start</button>
     <button (click)="openDataPolicyDialog()" mat-menu-item>Datapolicy</button>
     <button (click)="openImprintDialog()" mat-menu-item>Imprint</button>
 </mat-menu>

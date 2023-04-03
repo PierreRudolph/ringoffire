@@ -22,4 +22,9 @@ export class HomeComponent {
   openImprintDialog(): void {
     this.dialog.open(ImprintComponent);
   }
+
+
+  hrefNewGame() {
+    window.location.href = '/';
+  }
 }

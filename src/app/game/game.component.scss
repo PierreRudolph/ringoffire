@@ -179,7 +179,9 @@ app-player-mobile {
     display: flex;
     top: 0px;
     flex-wrap: wrap;
-    max-height: 73vh;
+    max-height: calc(100vh - 200px);
+    min-height: 100px;
+    padding-bottom: 10px;
     overflow: auto;
 }
 
